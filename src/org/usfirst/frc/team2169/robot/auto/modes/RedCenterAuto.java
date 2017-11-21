@@ -2,15 +2,14 @@ package org.usfirst.frc.team2169.robot.auto.modes;
 
 import org.usfirst.frc.team2169.robot.RobotStates;
 import org.usfirst.frc.team2169.robot.RobotStates.runningMode;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RedCenterAuto extends CommandGroup {
 	
 	int selectedAuto;
-	
+
+	//Getter Method to get auto mode from AutoManager
 	public void selectMode(int mode) {
 
     	selectedAuto = mode;
@@ -18,7 +17,7 @@ public class RedCenterAuto extends CommandGroup {
 	}
 	
     public RedCenterAuto() {
-    	
+
     	if(selectedAuto == 0) {
     		
     		//Run Default Auto
@@ -49,10 +48,13 @@ public class RedCenterAuto extends CommandGroup {
     	
     	smartDashPush();
     	RobotStates.runningMode = runningMode.AUTO;
+    	
     }
     
     public void smartDashPush() {
+    	
     	//Put Smartdashboard output
-    	SmartDashboard.putString("Running Auto:", "Red Center");
+    	SmartDashboard.putString("Running Auto:", " Red Center");
+    	
     }
 }
