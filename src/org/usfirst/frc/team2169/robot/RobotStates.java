@@ -1,6 +1,9 @@
 package org.usfirst.frc.team2169.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 public class RobotStates {
+	
 	
 	//Put Autonomous States in here
 	public static enum runningMode{

@@ -23,7 +23,10 @@ public class BlueLeftAuto extends CommandGroup {
     }
     
     public void smartDashPush() {
+    	
     	//Put Smartdashboard output
+    	
     	SmartDashboard.putString("Running Auto:", "Blue Left");
+    
     }
 }

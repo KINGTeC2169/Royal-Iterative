@@ -4,6 +4,8 @@ public class ControlMap {
 	
 	public ControlMap(){
 		
+		//Controls go here
+		
 	}
 
 }
