@@ -1,6 +1,6 @@
-package org.usfirst.frc.team2169.robot.Subsystems;
+package org.usfirst.frc.team2169.robot.subsystems;
 
-import org.usfirst.frc.team2169.robot.Subsystems.Subsystem;
+import org.usfirst.frc.team2169.robot.subsystems.Subsystem;
 
 public class Shooter extends Subsystem{
 

@@ -12,6 +12,7 @@ public class AutoManager<V> {
 	public AutoManager(SendableChooser<V> chooser) {
 		
 		sampleAuto = new SampleAuto();
+		chooser.getSelected();
 	
 	}
 	

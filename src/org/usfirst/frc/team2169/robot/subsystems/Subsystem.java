@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2169.robot.Subsystems;
+package org.usfirst.frc.team2169.robot.subsystems;
 
 public abstract class Subsystem {
 	

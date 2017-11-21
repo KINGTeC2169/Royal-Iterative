@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2169.robot;
 
-import org.usfirst.frc.team2169.robot.Subsystems.Superstructure;
 import org.usfirst.frc.team2169.robot.auto.modes.SampleAuto;
+import org.usfirst.frc.team2169.robot.subsystems.Superstructure;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -43,16 +43,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		
-		
-
 		try{
 		
 		}
 		catch(Exception e){
 			DriverStation.reportError(e.toString(), true);
 		}
-		
-		
 		
 	}
 
