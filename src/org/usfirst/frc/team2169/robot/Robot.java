@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2169.robot;
 
-import org.usfirst.frc.team2169.robot.auto.modes.SampleAuto;
+import org.usfirst.frc.team2169.robot.auto.modes.RedLeftAuto;
 import org.usfirst.frc.team2169.robot.subsystems.Superstructure;
 
 import edu.wpi.first.wpilibj.DriverStation;
