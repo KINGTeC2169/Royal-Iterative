@@ -13,6 +13,7 @@ public class Robot extends IterativeRobot {
 	
 	SendableChooser<Integer> position;
 	SendableChooser<Integer> alliance;
+	SendableChooser<Integer> mode;
 	AutoManager auto;
 	ControlMap controls;
 	Superstructure superStructure;
@@ -23,7 +24,7 @@ public class Robot extends IterativeRobot {
 		RobotStates.runningMode = runningMode.IDLE;
 		
 		try{
-			auto = new AutoManager(alliance, position);
+			auto = new AutoManager(alliance, position, mode);
 			superStructure = new Superstructure();
 			controls = new ControlMap();
 
@@ -55,6 +56,8 @@ public class Robot extends IterativeRobot {
 		RobotStates.runningMode = runningMode.TELEOP;
 		
 		try{
+			
+			//Put Tele-Op Methods here
 		
 		}
 		catch(Exception e){

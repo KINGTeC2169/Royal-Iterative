@@ -4,13 +4,45 @@ import org.usfirst.frc.team2169.robot.RobotStates;
 import org.usfirst.frc.team2169.robot.RobotStates.runningMode;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RedLeftAuto extends CommandGroup {
+	
+	int selectedAuto;
 
+	
+	public void selectMode(int mode) {
+
+    	selectedAuto = mode;
+    	
+	}
+	
     public RedLeftAuto() {
-
-		//Put Sequentials and Parallels of Tasks here.
+    	
+    	if(selectedAuto == 0) {
+    		
+    		//Run Default Auto
+    		//Code for default auto goes here
+    		
+    	}
+    	
+    	else if(selectedAuto == 1) {
+    	
+    		//Run Auto 2
+    		//Code for auto 2 goes here
+    		
+    	}
+    	
+    	else if(selectedAuto == 2) {
+        	
+    		//Run Auto 3
+    		//Code for auto 3 goes here
+    		
+    	}
+    	
+    	
+    	
     	
     }
     

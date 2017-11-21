@@ -1,5 +1,6 @@
-package org.usfirst.frc.team2169.robot.auto;
+ package org.usfirst.frc.team2169.robot.auto;
 
+import org.usfirst.frc.team2169.robot.Constants;
 import org.usfirst.frc.team2169.robot.auto.modes.BlueCenterAuto;
 import org.usfirst.frc.team2169.robot.auto.modes.BlueLeftAuto;
 import org.usfirst.frc.team2169.robot.auto.modes.BlueRightAuto;
@@ -17,12 +18,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class AutoManager {
 	
 	//Alliance IDs
+	
 		int alliance;
 		int position;
+		int mode;
+		
 	//Sendable Chooser Declarations
+		
 		SendableChooser<Integer> allianceChooser;
 		SendableChooser<Integer> positionChooser;
+		SendableChooser<Integer> modeChooser;
+		
 	//Command Declarations
+		
 		BlueLeftAuto bLAuto;
 		BlueCenterAuto bCAuto;
 		BlueRightAuto bRAuto;
@@ -31,10 +39,11 @@ public class AutoManager {
 		RedRightAuto rRAuto;
 		SelfTest selfTest;
 	
-	public AutoManager(SendableChooser<Integer> allianceChooserParam, SendableChooser<Integer> positionChooserParam) {
+	public AutoManager(SendableChooser<Integer> allianceChooserParam, SendableChooser<Integer> positionChooserParam,SendableChooser<Integer> modeParam) {
 		
 		allianceChooser = allianceChooserParam;
 		positionChooser = positionChooserParam;
+		modeChooser = modeParam;
 		
 		bLAuto = new BlueLeftAuto();
 		bCAuto = new BlueCenterAuto();
@@ -54,16 +63,22 @@ public class AutoManager {
 		positionChooser.addObject("Center", 0);
 		positionChooser.addObject("Right", 1);
 		
+		//Mode Choosers
+		modeChooser.addDefault(Constants.defaultAutoName, 0);
+		modeChooser.addObject(Constants.secondAutoName, 0);
+		modeChooser.addObject(Constants.thirdAutoName, 0);
+		
 	
 	}
 	
 	public void runAuto() {
-		alliance = allianceChooser.getSelected();
-		position = positionChooser.getSelected();
+		alliance = allianceChooser.getSelected().intValue();
+		position = positionChooser.getSelected().intValue();
+		mode = modeChooser.getSelected().intValue();
 		
 		if(alliance == 0) {
 			System.out.println("Running Self Test");
-			bLAuto.start();
+			selfTest.start();
 			System.out.println("Auto Complete");
 		}
 		
@@ -72,6 +87,8 @@ public class AutoManager {
 			if(position == -1) {
 			
 				//Blue Left Auto
+				bLAuto.selectMode(mode);
+				System.out.println(modeChooser.getSelected() + " auto selected");
 				System.out.println("Running Blue Left Auto");
 				bLAuto.start();
 				System.out.println("Auto Complete");
@@ -81,6 +98,8 @@ public class AutoManager {
 			else if(position == 0) {
 				
 				//Blue Center Auto
+				bCAuto.selectMode(mode);
+				System.out.println(modeChooser.getSelected() + " auto selected");
 				System.out.println("Running Blue Center Auto");
 				bCAuto.start();
 				System.out.println("Auto Complete");
@@ -90,6 +109,8 @@ public class AutoManager {
 			else if(position == 1) {
 			
 				//Blue Right Auto
+				bRAuto.selectMode(mode);
+				System.out.println(modeChooser.getSelected() + " auto selected");
 				System.out.println("Running Blue Right Auto");
 				bRAuto.start();
 				System.out.println("Auto Complete");
@@ -109,6 +130,8 @@ public class AutoManager {
 			if(position == -1) {
 				
 				//Red Left Auto
+				rLAuto.selectMode(mode);
+				System.out.println(modeChooser.getSelected() + " auto selected");
 				System.out.println("Running Red Left Auto");
 				rLAuto.start();
 				System.out.println("Auto Complete");
@@ -118,6 +141,8 @@ public class AutoManager {
 			else if(position == 0) {
 				
 				//Red Center Auto
+				rCAuto.selectMode(mode);
+				System.out.println(modeChooser.getSelected() + " auto selected");
 				System.out.println("Running Red Center Auto");
 				rCAuto.start();
 				System.out.println("Auto Complete");
@@ -128,6 +153,8 @@ public class AutoManager {
 			else if(position == 1) {
 			
 				//Red Right Auto
+				rRAuto.selectMode(mode);
+				System.out.println(modeChooser.getSelected() + " auto selected");
 				System.out.println("Running Red Right Auto");
 				rRAuto.start();
 				System.out.println("Auto Complete");

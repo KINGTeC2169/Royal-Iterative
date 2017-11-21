@@ -4,16 +4,16 @@ import org.usfirst.frc.team2169.robot.RobotStates;
 import org.usfirst.frc.team2169.robot.RobotStates.runningMode;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SelfTest extends CommandGroup {
-
+	
     public SelfTest() {
 
-		//Put Sequentials and Parallels of Tasks here.
+    	//SelfTest code
     	
     }
-    
     public void looper() {
     	
     	//Put looping checks/code in here
