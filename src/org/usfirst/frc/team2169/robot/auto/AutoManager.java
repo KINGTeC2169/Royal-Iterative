@@ -6,21 +6,35 @@ import org.usfirst.frc.team2169.robot.auto.modes.BlueRightAuto;
 import org.usfirst.frc.team2169.robot.auto.modes.RedCenterAuto;
 import org.usfirst.frc.team2169.robot.auto.modes.RedLeftAuto;
 import org.usfirst.frc.team2169.robot.auto.modes.RedRightAuto;
+import org.usfirst.frc.team2169.robot.auto.modes.SelfTest;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
+
+//End users shouldn't need to touch this.
+
 
 public class AutoManager {
 	
+	//Alliance IDs
+		int alliance;
+		int position;
+	//Sendable Chooser Declarations
+		SendableChooser<Integer> allianceChooser;
+		SendableChooser<Integer> positionChooser;
 	//Command Declarations
-		Command bLAuto;
-		Command bCAuto;
-		Command bRAuto;
-		Command rLAuto;
-		Command rCAuto;
-		Command rRAuto;
+		BlueLeftAuto bLAuto;
+		BlueCenterAuto bCAuto;
+		BlueRightAuto bRAuto;
+		RedLeftAuto rLAuto;
+		RedCenterAuto rCAuto;
+		RedRightAuto rRAuto;
+		SelfTest selfTest;
 	
-	public AutoManager(SendableChooser<Integer> allianceChooser, SendableChooser<Integer> positionChooser) {
+	public AutoManager(SendableChooser<Integer> allianceChooserParam, SendableChooser<Integer> positionChooserParam) {
+		
+		allianceChooser = allianceChooserParam;
+		positionChooser = positionChooserParam;
 		
 		bLAuto = new BlueLeftAuto();
 		bCAuto = new BlueCenterAuto();
@@ -28,6 +42,7 @@ public class AutoManager {
 		rLAuto = new RedLeftAuto();
 		rCAuto = new RedCenterAuto();
 		rRAuto = new RedRightAuto();
+		selfTest = new SelfTest();
 		
 		//Alliance Choosers
 		allianceChooser.addDefault("Self-Test", 0);
@@ -39,14 +54,17 @@ public class AutoManager {
 		positionChooser.addObject("Center", 0);
 		positionChooser.addObject("Right", 1);
 		
-		runAuto(allianceChooser.getSelected(),positionChooser.getSelected());
 	
 	}
 	
-	public void runAuto(int alliance, int position) {
+	public void runAuto() {
+		alliance = allianceChooser.getSelected();
+		position = positionChooser.getSelected();
 		
 		if(alliance == 0) {
-			//Self-Test Code
+			System.out.println("Running Self Test");
+			bLAuto.start();
+			System.out.println("Auto Complete");
 		}
 		
 		else if(alliance == 1) {
@@ -131,7 +149,82 @@ public class AutoManager {
 		
 		
 		
+		
+		
 	}
 	
-	
+	public void autoLooping() {
+		
+		if(alliance == 0) {
+			selfTest.looper();
+		}
+		
+		else if(alliance == 1) {
+			
+			if(position == -1) {
+			
+				//Blue Left Auto Looper
+				bLAuto.looper();
+			
+			}
+			
+			else if(position == 0) {
+				
+				//Blue Center Auto Looper
+				bCAuto.looper();
+				
+			}
+			
+			else if(position == 1) {
+			
+				//Blue Right Auto Looper
+				bRAuto.looper();
+			
+			}
+			else {
+				
+				//Failure
+				
+			}
+			
+		}
+		
+		else if(alliance == 2) {
+
+			if(position == -1) {
+				
+				//Red Left Auto Looper
+				rLAuto.looper();
+			
+			}
+			
+			else if(position == 0) {
+				
+				//Red Center Auto Looper
+				rCAuto.looper();
+				
+				
+			}
+			
+			else if(position == 1) {
+			
+				//Red Right Auto Looper
+				rRAuto.looper();
+			}	
+			else {
+				
+				//Failure
+				
+			}
+			
+		}
+		else {
+			
+			//Failure
+			
+		}
+		
+		
+	}
+
 }
