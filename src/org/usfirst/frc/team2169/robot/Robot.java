@@ -1,9 +1,11 @@
 package org.usfirst.frc.team2169.robot;
 
 import org.usfirst.frc.team2169.robot.Subsystems.Superstructure;
+import org.usfirst.frc.team2169.robot.auto.modes.SampleAuto;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Command;
 
 
 public class Robot extends IterativeRobot {
