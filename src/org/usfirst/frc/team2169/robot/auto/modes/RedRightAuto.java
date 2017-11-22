@@ -2,6 +2,7 @@ package org.usfirst.frc.team2169.robot.auto.modes;
 
 import org.usfirst.frc.team2169.robot.RobotStates;
 import org.usfirst.frc.team2169.robot.RobotStates.runningMode;
+import org.usfirst.frc.team2169.robot.auto.AutoManager;
 import org.usfirst.frc.team2169.robot.auto.tasks.TestTask;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -28,6 +29,7 @@ public class RedRightAuto extends CommandGroup {
     		
     		System.out.println("Auto 0 Starting");
     		task.start();
+
     		
     		
     	}
@@ -51,8 +53,6 @@ public class RedRightAuto extends CommandGroup {
     
     public void looper() {
     	
-    	i = i++;
-    	
     	smartDashPush();
     	RobotStates.runningMode = runningMode.AUTO;
     	
@@ -60,9 +60,10 @@ public class RedRightAuto extends CommandGroup {
     
     public void smartDashPush() {
     	
+    	SmartDashboard.putString("Running Auto: ", AutoManager.autoName);
+    	
     	//Put Smartdashboard output
-    	SmartDashboard.putNumber("i",i);
-    	SmartDashboard.putString("Running Auto:", " Red Right");
+
     	
     }
 }

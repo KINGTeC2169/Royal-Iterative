@@ -2,6 +2,8 @@ package org.usfirst.frc.team2169.robot.auto.modes;
 
 import org.usfirst.frc.team2169.robot.RobotStates;
 import org.usfirst.frc.team2169.robot.RobotStates.runningMode;
+import org.usfirst.frc.team2169.robot.auto.AutoManager;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -54,7 +56,8 @@ public class BlueLeftAuto extends CommandGroup {
     public void smartDashPush() {
     	
     	//Put Smartdashboard output
-    	SmartDashboard.putString("Running Auto:", "Blue Left");
+
+    	SmartDashboard.putString("Running Auto: ", AutoManager.autoName);
     	
     }
 }
