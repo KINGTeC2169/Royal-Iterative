@@ -2,13 +2,17 @@ package org.usfirst.frc.team2169.robot.auto.modes;
 
 import org.usfirst.frc.team2169.robot.RobotStates;
 import org.usfirst.frc.team2169.robot.RobotStates.runningMode;
+import org.usfirst.frc.team2169.robot.auto.tasks.TestTask;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RedRightAuto extends CommandGroup {
 	
 	int selectedAuto;
-
+	TestTask task;
+	int i = 0;
+	
 	//Getter Method to get auto mode from AutoManager
 	public void selectMode(int mode) {
 
@@ -18,24 +22,27 @@ public class RedRightAuto extends CommandGroup {
 	
     public RedRightAuto() {
 
+    	task = new TestTask();
+    	
     	if(selectedAuto == 0) {
     		
-    		//Run Default Auto
-    		//Code for default auto goes here
+    		System.out.println("Auto 0 Starting");
+    		task.start();
+    		
     		
     	}
     	
     	else if(selectedAuto == 1) {
     	
-    		//Run Auto 2
-    		//Code for auto 2 goes here
+    		System.out.println("Auto 1 Starting");
+    		task.start();
     		
     	}
     	
     	else if(selectedAuto == 2) {
         	
-    		//Run Auto 3
-    		//Code for auto 3 goes here
+    		System.out.println("Auto 2 Starting");
+    		task.start();
     		
     	}
     	
@@ -44,7 +51,7 @@ public class RedRightAuto extends CommandGroup {
     
     public void looper() {
     	
-    	//Put looping checks/code in here
+    	i = i++;
     	
     	smartDashPush();
     	RobotStates.runningMode = runningMode.AUTO;
@@ -54,6 +61,7 @@ public class RedRightAuto extends CommandGroup {
     public void smartDashPush() {
     	
     	//Put Smartdashboard output
+    	SmartDashboard.putNumber("i",i);
     	SmartDashboard.putString("Running Auto:", " Red Right");
     	
     }
