@@ -14,7 +14,6 @@ public class Robot extends IterativeRobot {
 	ControlMap controls;
 	Superstructure superStructure;
 	
-	
 
 	
 	@Override
@@ -37,7 +36,7 @@ public class Robot extends IterativeRobot {
 		auto.runAuto();
 		
 	}
-
+	
 	@Override
 	public void autonomousPeriodic() {
 		
@@ -64,8 +63,28 @@ public class Robot extends IterativeRobot {
 		
 	}
 
+
+	@Override
+	public void disabledInit() {
+	
+		//Stop all subsystems here	
+		
+	}
+	
+	@Override
+	public void disabledPeriodic() {
+	
+		//Optional:
+		//Push data to dashboard
+		//or Nothing
+	
+	}
+	
+	
 	@Override
 	public void testPeriodic() {
 	}
+	
+	
 }
 
