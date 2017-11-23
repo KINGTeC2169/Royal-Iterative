@@ -23,13 +23,10 @@ public class RedRightAuto extends CommandGroup {
 	
     public RedRightAuto() {
 
-    	task = new TestTask();
     	
     	if(selectedAuto == 0) {
     		
     		System.out.println("Auto 0 Starting");
-    		task.start();
-
     		
     		
     	}
@@ -37,14 +34,12 @@ public class RedRightAuto extends CommandGroup {
     	else if(selectedAuto == 1) {
     	
     		System.out.println("Auto 1 Starting");
-    		task.start();
     		
     	}
     	
     	else if(selectedAuto == 2) {
         	
     		System.out.println("Auto 2 Starting");
-    		task.start();
     		
     	}
     	

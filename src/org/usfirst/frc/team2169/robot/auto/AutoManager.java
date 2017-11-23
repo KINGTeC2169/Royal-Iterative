@@ -8,6 +8,8 @@ import org.usfirst.frc.team2169.robot.auto.modes.RedCenterAuto;
 import org.usfirst.frc.team2169.robot.auto.modes.RedLeftAuto;
 import org.usfirst.frc.team2169.robot.auto.modes.RedRightAuto;
 import org.usfirst.frc.team2169.robot.auto.modes.SelfTest;
+import org.usfirst.frc.team2169.robot.auto.tasks.TestTask;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -67,16 +69,7 @@ public class AutoManager {
 	SmartDashboard.putData("Alliance Selector", allianceChooser);
 	SmartDashboard.putData("Field Position Selector", positionChooser);
 	SmartDashboard.putData("Auto Mode Selector", modeChooser);
-	
 
-		bLAuto = new BlueLeftAuto();
-		bCAuto = new BlueCenterAuto();
-		bRAuto = new BlueRightAuto();
-		rLAuto = new RedLeftAuto();
-		rCAuto = new RedCenterAuto();
-		rRAuto = new RedRightAuto();
-		selfTest = new SelfTest();
-	
 	}
 	
 	public void runAuto() {
@@ -89,7 +82,10 @@ public class AutoManager {
 		//Self Test
 		if(alliance == 0) {
 			
+			
+			selfTest = new SelfTest();
 			autoName = "Self Test";
+			selfTest.addSequential(new TestTask());
 		
 			selfTest.start();
 			System.out.println("Auto Complete");
@@ -105,7 +101,7 @@ public class AutoManager {
 			if(position == -1) {
 			
 				//Blue Left Auto
-			
+				bLAuto = new BlueLeftAuto();
 				autoName += " Left";
 				
 				bLAuto.selectMode(mode);
@@ -120,7 +116,7 @@ public class AutoManager {
 			else if(position == 0) {
 				
 				//Blue Center Auto
-				
+				bCAuto = new BlueCenterAuto();
 				autoName += " Center";
 				
 				bCAuto.selectMode(mode);
@@ -135,7 +131,7 @@ public class AutoManager {
 			else if(position == 1) {
 			
 				//Blue Right Auto
-				
+				bRAuto = new BlueRightAuto();
 				autoName += " Right";
 				
 				bRAuto.selectMode(mode);
@@ -163,7 +159,7 @@ public class AutoManager {
 			if(position == -1) {
 				
 				//Red Left Auto
-				
+				rLAuto = new RedLeftAuto();
 				autoName += " Left";
 				autoName += getModeName(mode);
 				rLAuto.selectMode(mode);
@@ -177,7 +173,7 @@ public class AutoManager {
 			else if(position == 0) {
 				
 				//Red Center Auto
-				
+				rCAuto = new RedCenterAuto();
 				autoName += " Center";
 				autoName += getModeName(mode);
 				rCAuto.selectMode(mode);
@@ -192,7 +188,7 @@ public class AutoManager {
 			else if(position == 1) {
 			
 				//Red Right Auto
-				
+				rRAuto = new RedRightAuto();
 				autoName += " Right";
 				autoName += getModeName(mode);
 				rRAuto.selectMode(mode);				
