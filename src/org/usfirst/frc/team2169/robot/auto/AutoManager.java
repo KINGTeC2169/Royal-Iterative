@@ -85,8 +85,6 @@ public class AutoManager {
 			
 			selfTest = new SelfTest();
 			autoName = "Self Test";
-			selfTest.addSequential(new TestTask());
-		
 			selfTest.start();
 			System.out.println("Auto Complete");
 		}
