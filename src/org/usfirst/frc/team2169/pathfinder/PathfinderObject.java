@@ -11,12 +11,14 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
-public class TrajectoryTemplate {
+public class PathfinderObject {
 	
 	//Waypoints go here
 	Waypoint[] points;
 	
-	TrajectoryTemplate(Waypoint[] importedPoints){
+	public boolean isFinished = false;
+	
+	public PathfinderObject(Waypoint[] importedPoints){
 		points = importedPoints;
 	}
 	
@@ -53,7 +55,7 @@ public class TrajectoryTemplate {
 	
 	}
 	
-	public void getWheelPositions(CANTalon leftTalon, CANTalon rightTalon, Gyro gyro) {
+	public void pathfinderLooper(CANTalon leftTalon, CANTalon rightTalon, Gyro gyro) {
 		double l = leftFollower.calculate(leftTalon.getEncPosition());
 		double r = rightFollower.calculate(rightTalon.getEncPosition());
 
@@ -63,8 +65,31 @@ public class TrajectoryTemplate {
 		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
 		double turn = 0.8 * (-1.0/80.0) * angleDifference;
 
-		leftTalon.set(l + turn);
-		rightTalon.set(r - turn);
+		//If left wheel trajectory isn't finished, set new power.
+		if(!leftFollower.isFinished()) {
+			leftTalon.set(l + turn);
+		}
+
+		//If right wheel trajectory isn't finished, set new power.
+		if(!rightFollower.isFinished()) {
+			rightTalon.set(r - turn);
+		}
+		
+		//Return if trajectories are both finished
+		if(leftFollower.isFinished() && rightFollower.isFinished()) {
+			
+			isFinished = true;
+		
+		}
+		
+		//
+		else {
+		
+			isFinished = false;
+		
+		}
 	}
+	
+	
 }
 
