@@ -24,10 +24,10 @@ public class PathfinderObject {
 	EncoderFollower leftFollower;
 	EncoderFollower rightFollower;
 	
-	public void calculatePath(CANTalon leftTalon, CANTalon rightTalon) {
+	public void calculatePath(int leftTalon, int rightTalon) {
 	Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH,
 			Constants.timeStep, Constants.maxVelocity, Constants.maxAcceleration, Constants.maxJerk);
-
+ 
 	// Generate the trajectory
 	Trajectory trajectory = Pathfinder.generate(points, config);
 
@@ -45,8 +45,8 @@ public class PathfinderObject {
 	leftFollower = new EncoderFollower(left);
 	rightFollower = new EncoderFollower(right);
 	
-	leftFollower.configureEncoder(leftTalon.getEncPosition(), Constants.ticksPerRotation, Constants.wheelDiameter);
-	rightFollower.configureEncoder(rightTalon.getEncPosition(), Constants.ticksPerRotation, Constants.wheelDiameter);
+	leftFollower.configureEncoder(leftTalon, Constants.ticksPerRotation, Constants.wheelDiameter);
+	rightFollower.configureEncoder(rightTalon, Constants.ticksPerRotation, Constants.wheelDiameter);
 	
 	//Configure Pathfinder PID
 	leftFollower.configurePIDVA(Constants.pathfinderP, Constants.pathfinderI, Constants.pathfinderD, Constants.pathfinderVR / Constants.maxVelocity, Constants.accelerationGain);
@@ -81,12 +81,41 @@ public class PathfinderObject {
 		
 		}
 		
+		
 		//
 		else {
 		
 			isFinished = false;
 		
 		}
+		
+	}
+		public void pathfinderLooper(int leftEnc, int rightEnc, CANTalon leftTalon, CANTalon rightTalon, Gyro gyro) {
+			double l = leftFollower.calculate(leftEnc);
+			double r = rightFollower.calculate(rightEnc);
+
+			double gyro_heading = gyro.getAngle();    // Assuming the gyro is giving a value in degrees
+			double desired_heading = Pathfinder.r2d(leftFollower.getHeading());  // Should also be in degrees
+
+			double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
+			double turn = 0.8 * (-1.0/80.0) * angleDifference;
+
+			//If left wheel trajectory isn't finished, set new power.
+			if(!leftFollower.isFinished()) {
+				leftTalon.set(l + turn);
+			}
+
+			//If right wheel trajectory isn't finished, set new power.
+			if(!rightFollower.isFinished()) {
+				rightTalon.set(r - turn);
+			}
+			
+			//Return if trajectories are both finished
+			if(leftFollower.isFinished() && rightFollower.isFinished()) {
+				
+				isFinished = true;
+			
+			}
 	}
 	
 	

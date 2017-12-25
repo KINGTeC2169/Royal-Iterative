@@ -16,7 +16,7 @@ public class FollowPath extends Command {
 	CANTalon right;
 	Gyro gyro;
 	
-    public FollowPath(Waypoint[] points, CANTalon left_, CANTalon right_, Gyro gyro_) {
+    public FollowPath(Waypoint[] points, CANTalon left_, CANTalon right_, Gyro gyro_, int Left, int Right) {
     
     	path = new PathfinderObject(points);
     	left = left_;
@@ -29,7 +29,7 @@ public class FollowPath extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	
-    	path.calculatePath(left, right);
+    	path.calculatePath(left.getEncPosition(), right.getEncPosition());
     	DriverStation.reportWarning("Path Calculated", false);
     		
     }
