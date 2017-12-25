@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2169.robot.auto;
 
-import org.usfirst.frc.team2169.pathfinder.Pathfinder;
-import org.usfirst.frc.team2169.pathfinder.Waypoint;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Waypoint;
 
 public class Paths {
 	

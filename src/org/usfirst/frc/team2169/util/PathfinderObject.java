@@ -1,10 +1,9 @@
-package org.usfirst.frc.team2169.pathfinder;
-
-import org.usfirst.frc.team2169.pathfinder.Pathfinder;
-import org.usfirst.frc.team2169.pathfinder.Trajectory;
-import org.usfirst.frc.team2169.pathfinder.Waypoint;
-import org.usfirst.frc.team2169.pathfinder.followers.EncoderFollower;
-import org.usfirst.frc.team2169.pathfinder.modifiers.TankModifier;
+package org.usfirst.frc.team2169.util;
+import jaci.pathfinder.Pathfinder;
+import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.Waypoint;
+import jaci.pathfinder.followers.EncoderFollower;
+import jaci.pathfinder.modifiers.TankModifier;
 import org.usfirst.frc.team2169.robot.Constants;
 
 import com.ctre.CANTalon;

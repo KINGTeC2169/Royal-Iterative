@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2169.robot.auto.tasks;
 
-import org.usfirst.frc.team2169.pathfinder.PathfinderObject;
-import org.usfirst.frc.team2169.pathfinder.Waypoint;
+import org.usfirst.frc.team2169.util.PathfinderObject;
+import jaci.pathfinder.Waypoint;
 
 import com.ctre.CANTalon;
 
