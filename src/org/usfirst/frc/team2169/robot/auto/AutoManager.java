@@ -8,7 +8,6 @@ import org.usfirst.frc.team2169.robot.auto.modes.RedCenterAuto;
 import org.usfirst.frc.team2169.robot.auto.modes.RedLeftAuto;
 import org.usfirst.frc.team2169.robot.auto.modes.RedRightAuto;
 import org.usfirst.frc.team2169.robot.auto.modes.SelfTest;
-import org.usfirst.frc.team2169.robot.auto.tasks.TestTask;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

@@ -1,22 +1,23 @@
 package org.usfirst.frc.team2169.robot.subsystems;
 
+import org.usfirst.frc.team2169.robot.ActuatorMap;
 import org.usfirst.frc.team2169.robot.subsystems.Subsystem;
 import com.ctre.CANTalon;
-import com.kauailabs.navx.frc.AHRS;
 
-public class SampleSubsystem extends Subsystem{
+public class DriveTrain extends Subsystem{
 	
 	//Define null objects up here
 	//Public because autonomous needs to access actuators
 	//Static because there is only one of each subsystem
 	public static CANTalon left;
 	public static CANTalon right;
-	public static AHRS gyro;
 	
-	public SampleSubsystem(){
+	public DriveTrain(){
 		
+		left = new CANTalon(ActuatorMap.leftDriveTalon);
+		right = new CANTalon(ActuatorMap.rightDriveTalon);
 		//Create the objects and set properties
-	
+		
 	}
 	
 	@Override
