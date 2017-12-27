@@ -13,7 +13,6 @@ public class Robot extends IterativeRobot {
 	static AutoManager auto;
 	ControlMap controls;
 	Superstructure superStructure;
-	
 
 	
 	@Override
@@ -21,7 +20,6 @@ public class Robot extends IterativeRobot {
 		
 		RobotStates.runningMode = runningMode.IDLE;
 
-		
 			auto = new AutoManager();
 			superStructure = new Superstructure();
 			controls = new ControlMap();

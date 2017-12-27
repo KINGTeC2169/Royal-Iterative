@@ -7,25 +7,34 @@ import jaci.pathfinder.modifiers.TankModifier;
 import org.usfirst.frc.team2169.robot.Constants;
 
 import com.ctre.CANTalon;
-
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+import com.kauailabs.navx.frc.AHRS;
 
 public class PathfinderObject {
 	
 	//Waypoints go here
 	Waypoint[] points;
+	CANTalon leftTalon;
+	CANTalon rightTalon;
+	int leftID;
+	int rightID;
+	AHRS gyro;
 	
 	public boolean isFinished = false;
 	
-	public PathfinderObject(Waypoint[] importedPoints){
+	public PathfinderObject(Waypoint[] importedPoints, CANTalon leftTalon_, CANTalon rightTalon_, AHRS gyro_){
 		points = importedPoints;
+		leftTalon = leftTalon_;
+		rightTalon = rightTalon_;
+		leftID = leftTalon.getDeviceID();
+		rightID = rightTalon.getDeviceID();
+		gyro = gyro_;
 	}
 	
 	EncoderFollower leftFollower;
 	EncoderFollower rightFollower;
 	
-	public void calculatePath(int leftTalon, int rightTalon) {
-	Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH,
+	public void calculatePath() {
+		Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH,
 			Constants.timeStep, Constants.maxVelocity, Constants.maxAcceleration, Constants.maxJerk);
  
 	// Generate the trajectory
@@ -45,8 +54,8 @@ public class PathfinderObject {
 	leftFollower = new EncoderFollower(left);
 	rightFollower = new EncoderFollower(right);
 	
-	leftFollower.configureEncoder(leftTalon, Constants.ticksPerRotation, Constants.wheelDiameter);
-	rightFollower.configureEncoder(rightTalon, Constants.ticksPerRotation, Constants.wheelDiameter);
+	leftFollower.configureEncoder(leftID, Constants.ticksPerRotation, Constants.wheelDiameter);
+	rightFollower.configureEncoder(rightID, Constants.ticksPerRotation, Constants.wheelDiameter);
 	
 	//Configure Pathfinder PID
 	leftFollower.configurePIDVA(Constants.pathfinderP, Constants.pathfinderI, Constants.pathfinderD, Constants.pathfinderVR / Constants.maxVelocity, Constants.accelerationGain);
@@ -54,11 +63,11 @@ public class PathfinderObject {
 	
 	}
 	
-	public void pathfinderLooper(CANTalon leftTalon, CANTalon rightTalon, Gyro gyro) {
+	public void pathfinderLooper() {
 		double l = leftFollower.calculate(leftTalon.getEncPosition());
 		double r = rightFollower.calculate(rightTalon.getEncPosition());
 
-		double gyro_heading = gyro.getAngle();    // Assuming the gyro is giving a value in degrees
+		double gyro_heading = gyro.getYaw();    // Assuming the gyro is giving a value in degrees
 		double desired_heading = Pathfinder.r2d(leftFollower.getHeading());  // Should also be in degrees
 
 		double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
@@ -90,11 +99,11 @@ public class PathfinderObject {
 		}
 		
 	}
-		public void pathfinderLooper(int leftEnc, int rightEnc, CANTalon leftTalon, CANTalon rightTalon, Gyro gyro) {
+		public void pathfinderLooper(int leftEnc, int rightEnc) {
 			double l = leftFollower.calculate(leftEnc);
 			double r = rightFollower.calculate(rightEnc);
 
-			double gyro_heading = gyro.getAngle();    // Assuming the gyro is giving a value in degrees
+			double gyro_heading = gyro.getYaw();    // Assuming the gyro is giving a value in degrees
 			double desired_heading = Pathfinder.r2d(leftFollower.getHeading());  // Should also be in degrees
 
 			double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);

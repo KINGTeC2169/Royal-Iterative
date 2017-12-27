@@ -11,7 +11,7 @@ public class Superstructure {
 	public Superstructure(){
 		
 		navX = new AHRS(SPI.Port.kMXP, (byte)200);
-		
+
 	}
 	
 }

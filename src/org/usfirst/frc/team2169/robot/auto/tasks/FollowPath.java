@@ -4,24 +4,21 @@ import org.usfirst.frc.team2169.util.PathfinderObject;
 import jaci.pathfinder.Waypoint;
 
 import com.ctre.CANTalon;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class FollowPath extends Command {
 
 	PathfinderObject path;
-	CANTalon left;
-	CANTalon right;
-	Gyro gyro;
+	Encoder leftEnc;
+	Encoder rightEnc;
 	
-    public FollowPath(Waypoint[] points, CANTalon left_, CANTalon right_, Gyro gyro_, int Left, int Right) {
+    public FollowPath(Waypoint[] points, CANTalon left_, CANTalon right_, AHRS gyro_) {
     
-    	path = new PathfinderObject(points);
-    	left = left_;
-    	right = right_;
-    	gyro = gyro_;
+    	path = new PathfinderObject(points, left_, right_, gyro_);
     	
     	DriverStation.reportWarning("Path Created", false);
     }
@@ -29,15 +26,14 @@ public class FollowPath extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	
-    	path.calculatePath(left.getEncPosition(), right.getEncPosition());
+    	path.calculatePath();
     	DriverStation.reportWarning("Path Calculated", false);
     		
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	path.pathfinderLooper(left, right, gyro);
+    	path.pathfinderLooper();
     	
     }
 

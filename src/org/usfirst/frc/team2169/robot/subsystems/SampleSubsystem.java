@@ -2,7 +2,7 @@ package org.usfirst.frc.team2169.robot.subsystems;
 
 import org.usfirst.frc.team2169.robot.subsystems.Subsystem;
 import com.ctre.CANTalon;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+import com.kauailabs.navx.frc.AHRS;
 
 public class SampleSubsystem extends Subsystem{
 	
@@ -11,12 +11,12 @@ public class SampleSubsystem extends Subsystem{
 	//Static because there is only one of each subsystem
 	public static CANTalon left;
 	public static CANTalon right;
-	public static Gyro gyro;
+	public static AHRS gyro;
 	
 	public SampleSubsystem(){
 		
 		//Create the objects and set properties
-		
+	
 	}
 	
 	@Override
