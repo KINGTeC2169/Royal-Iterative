@@ -3,7 +3,7 @@ package org.usfirst.frc.team2169.robot.auto.tasks;
 import org.usfirst.frc.team2169.util.PathfinderObject;
 import jaci.pathfinder.Waypoint;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -16,7 +16,7 @@ public class FollowPath extends Command {
 	Encoder leftEnc;
 	Encoder rightEnc;
 	
-    public FollowPath(Waypoint[] points, CANTalon left_, CANTalon right_, AHRS gyro_) {
+    public FollowPath(Waypoint[] points, TalonSRX left_, TalonSRX right_, AHRS gyro_) {
     
     	path = new PathfinderObject(points, left_, right_, gyro_);
     	

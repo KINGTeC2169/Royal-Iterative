@@ -6,22 +6,23 @@ import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.modifiers.TankModifier;
 import org.usfirst.frc.team2169.robot.Constants;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 public class PathfinderObject {
 	
 	//Waypoints go here
 	Waypoint[] points;
-	CANTalon leftTalon;
-	CANTalon rightTalon;
+	TalonSRX leftTalon;
+	TalonSRX rightTalon;
 	int leftID;
 	int rightID;
 	AHRS gyro;
 	
 	public boolean isFinished = false;
 	
-	public PathfinderObject(Waypoint[] importedPoints, CANTalon leftTalon_, CANTalon rightTalon_, AHRS gyro_){
+	public PathfinderObject(Waypoint[] importedPoints, TalonSRX leftTalon_, TalonSRX rightTalon_, AHRS gyro_){
 		points = importedPoints;
 		leftTalon = leftTalon_;
 		rightTalon = rightTalon_;
@@ -29,7 +30,7 @@ public class PathfinderObject {
 		rightID = rightTalon.getDeviceID();
 		gyro = gyro_;
 	}
-	
+
 	EncoderFollower leftFollower;
 	EncoderFollower rightFollower;
 	
@@ -64,8 +65,8 @@ public class PathfinderObject {
 	}
 	
 	public void pathfinderLooper() {
-		double l = leftFollower.calculate(leftTalon.getEncPosition());
-		double r = rightFollower.calculate(rightTalon.getEncPosition());
+		double l = leftFollower.calculate(leftTalon.getSensorCollection().getPulseWidthPosition());
+		double r = rightFollower.calculate(rightTalon.getSensorCollection().getPulseWidthPosition());
 
 		double gyro_heading = gyro.getYaw();    // Assuming the gyro is giving a value in degrees
 		double desired_heading = Pathfinder.r2d(leftFollower.getHeading());  // Should also be in degrees
@@ -75,12 +76,12 @@ public class PathfinderObject {
 
 		//If left wheel trajectory isn't finished, set new power.
 		if(!leftFollower.isFinished()) {
-			leftTalon.set(l + turn);
+			leftTalon.set(ControlMode.PercentOutput,l + turn);
 		}
 
 		//If right wheel trajectory isn't finished, set new power.
 		if(!rightFollower.isFinished()) {
-			rightTalon.set(r - turn);
+			rightTalon.set(ControlMode.PercentOutput, r - turn);
 		}
 		
 		//Return if trajectories are both finished
@@ -111,12 +112,12 @@ public class PathfinderObject {
 
 			//If left wheel trajectory isn't finished, set new power.
 			if(!leftFollower.isFinished()) {
-				leftTalon.set(l + turn);
+				leftTalon.set(ControlMode.PercentOutput,l + turn);
 			}
 
 			//If right wheel trajectory isn't finished, set new power.
 			if(!rightFollower.isFinished()) {
-				rightTalon.set(r - turn);
+				rightTalon.set(ControlMode.PercentOutput,r - turn);
 			}
 			
 			//Return if trajectories are both finished

@@ -22,6 +22,7 @@ public class BlueCenterAuto extends CommandGroup {
 
     	if(selectedAuto == 0) {
     		
+    		
     		//Run Default Auto
     		//Code for default auto goes here
     		

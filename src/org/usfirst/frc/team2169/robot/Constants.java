@@ -7,12 +7,10 @@ public class Constants {
 	public static final String secondAutoName = "Auto 2";
 	public static final String thirdAutoName  = "Auto 3";
 	
-	//Contants go here
 	
-	//In Meters
+	//Robot Contants go here
 	public static final double wheelBaseWidth = 5;
 	public static final double wheelDiameter = 5;
-	
 	public static final int ticksPerRotation = 1250;
 
 	

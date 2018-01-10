@@ -3,6 +3,8 @@ package org.usfirst.frc.team2169.robot;
 import org.usfirst.frc.team2169.robot.RobotStates.runningMode;
 import org.usfirst.frc.team2169.robot.auto.AutoManager;
 import org.usfirst.frc.team2169.robot.subsystems.Superstructure;
+import org.usfirst.frc.team2169.util.FMSManager;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -13,18 +15,25 @@ public class Robot extends IterativeRobot {
 	static AutoManager auto;
 	ControlMap controls;
 	Superstructure superStructure;
-
+	public static FMSManager fms;
 	
 	@Override
 	public void robotInit() {
-		
-		RobotStates.runningMode = runningMode.IDLE;
 
-			auto = new AutoManager();
-			superStructure = new Superstructure();
-			controls = new ControlMap();
-			
+		fms = new FMSManager(m_ds);
+		RobotStates.runningMode = runningMode.IDLE;
+		auto = new AutoManager();
+		superStructure = new Superstructure();
+		controls = new ControlMap();
+		
+
 	
+	}
+	
+	public void disabledPeriodic() {
+		
+		
+		
 	}
 
 	@Override
@@ -67,15 +76,6 @@ public class Robot extends IterativeRobot {
 	
 		//Stop all subsystems here	
 		
-	}
-	
-	@Override
-	public void disabledPeriodic() {
-	
-		//Optional:
-		//Push data to dashboard
-		//or Nothing
-	
 	}
 	
 	

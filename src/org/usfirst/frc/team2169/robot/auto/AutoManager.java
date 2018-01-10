@@ -24,6 +24,7 @@ public class AutoManager {
 		int position;
 		int mode;
 		public static String autoName;
+		public static String gameMessage;
 		
 	//Sendable Chooser Declarations
 		
