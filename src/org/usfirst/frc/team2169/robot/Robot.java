@@ -4,6 +4,7 @@ import org.usfirst.frc.team2169.robot.RobotStates.runningMode;
 import org.usfirst.frc.team2169.robot.auto.AutoManager;
 import org.usfirst.frc.team2169.robot.subsystems.Superstructure;
 import org.usfirst.frc.team2169.util.FMSManager;
+import org.usfirst.frc.team2169.util.ShuffleBoardManager;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -16,6 +17,7 @@ public class Robot extends IterativeRobot {
 	ControlMap controls;
 	Superstructure superStructure;
 	public static FMSManager fms;
+	ShuffleBoardManager shuffle;
 	
 	@Override
 	public void robotInit() {
@@ -25,14 +27,14 @@ public class Robot extends IterativeRobot {
 		auto = new AutoManager();
 		superStructure = new Superstructure();
 		controls = new ControlMap();
-		
+		shuffle = new ShuffleBoardManager();
 
 	
 	}
 	
 	public void disabledPeriodic() {
 		
-		
+		shuffle.init(m_ds.isFMSAttached());
 		
 	}
 
@@ -48,19 +50,27 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 		
 		Scheduler.getInstance().run();
-	
+		shuffle.auto(m_ds.isFMSAttached());
 		auto.autoLooping();
 		
 	}
 
+	
+	@Override
+	public void teleopInit() {
+		// TODO Auto-generated method stub
+		super.teleopInit();
+	}
+	
+	
 	@Override
 	public void teleopPeriodic() {
 		
 		RobotStates.runningMode = runningMode.TELEOP;
 		
-		
 		try{
 			
+			shuffle.teleOp(m_ds.isFMSAttached());
 			//Put Tele-Op Methods here
 		
 		}
@@ -69,7 +79,6 @@ public class Robot extends IterativeRobot {
 		}
 		
 	}
-
 
 	@Override
 	public void disabledInit() {

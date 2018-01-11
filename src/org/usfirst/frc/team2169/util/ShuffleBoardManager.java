@@ -12,27 +12,52 @@ public class ShuffleBoardManager {
 		
 	}
 	
-	public void init() {
+	public void init(boolean fms) {
 	
-		connected();
-		SmartDashboard.putNumber("Battery Voltage", Robot.fms.batteryVoltage());
-		
+		if(fms) {
+			//FMS Is Attached
+			connected();
+			SmartDashboard.putNumber("Battery Voltage", Robot.fms.batteryVoltage());
+		}
+		else {
+			//FMS Is Not Attached
+			connected();
+			SmartDashboard.putNumber("Battery Voltage", Robot.fms.batteryVoltage());
+		}
+
 	}
 	
-	public void auto() {
-		
-		batteryData();
-		connected();
-		SmartDashboard.putNumber("Match Time", Robot.fms.matchTime());
-		
+	public void auto(boolean fms) {
+	
+		if(fms) {
+			//FMS Is Attached
+			batteryData();
+			connected();
+			SmartDashboard.putNumber("Match Time", Robot.fms.matchTime());
+		}
+		else {
+			//FMS Is Not Attached
+			batteryData();
+			connected();
+			SmartDashboard.putNumber("Match Time", Robot.fms.matchTime());
+		}
 	}
 	
-	public void teleOp() {
+	public void teleOp(boolean fms) {
 		
-		batteryData();
-		connected();
-		SmartDashboard.putNumber("Match Time", Robot.fms.matchTime());
-				
+		if(fms) {
+			//FMS Is Attached
+			batteryData();
+			connected();
+			SmartDashboard.putNumber("Match Time", Robot.fms.matchTime());
+		}
+		else {
+			//FMS Is Not Attached
+			batteryData();
+			connected();
+			SmartDashboard.putNumber("Match Time", Robot.fms.matchTime());
+		}
+		
 	}
 	
 		//Local Methods
