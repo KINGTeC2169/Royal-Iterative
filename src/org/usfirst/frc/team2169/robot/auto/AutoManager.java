@@ -72,8 +72,9 @@ public class AutoManager {
 
 	}
 	
-	public void runAuto() {
+	public void runAuto(String gameMessage_) {
 
+		gameMessage = gameMessage_;
 		alliance = allianceChooser.getSelected().intValue();
 		position = positionChooser.getSelected().intValue();
 		mode = modeChooser.getSelected().intValue();

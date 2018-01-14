@@ -15,5 +15,6 @@
 			<attribute name="javadoc_location" value="jar:file:/home/maxcr1/wpilib/user/java/docs/CTRE_Phoenix-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="USERLIBS_DIR/CTRE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

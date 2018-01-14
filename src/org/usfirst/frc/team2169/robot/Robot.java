@@ -34,6 +34,7 @@ public class Robot extends IterativeRobot {
 	
 	public void disabledPeriodic() {
 		
+		RobotStates.isFMSConnected = m_ds.isFMSAttached();
 		shuffle.init(m_ds.isFMSAttached());
 		
 	}
@@ -42,13 +43,14 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 
 		RobotStates.runningMode = runningMode.AUTO;
-		auto.runAuto();
+		auto.runAuto(m_ds.getGameSpecificMessage());
 		
 	}
 	
 	@Override
 	public void autonomousPeriodic() {
 		
+		RobotStates.isFMSConnected = m_ds.isFMSAttached();
 		Scheduler.getInstance().run();
 		shuffle.auto(m_ds.isFMSAttached());
 		auto.autoLooping();
@@ -66,6 +68,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		
+		RobotStates.isFMSConnected = m_ds.isFMSAttached();
 		RobotStates.runningMode = runningMode.TELEOP;
 		
 		try{
